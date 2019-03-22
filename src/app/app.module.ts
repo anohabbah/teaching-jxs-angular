@@ -1,18 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule} from "@angular/forms";
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SearchComponent } from './search/search.component';
+import { AppComponent as PokemonComponent } from './pokemon/app.component';
+import { FilterPokemonPipe } from './filter-pokemon.pipe';
+import {HttpClientModule} from "@angular/common/http";
+import {PokemonService} from "./pokemon.service";
+import { DetailsComponent } from './pokemon/details/details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SearchComponent
+    PokemonComponent,
+    FilterPokemonPipe,
+    DetailsComponent
   ],
   imports: [
-    BrowserModule
+    HttpClientModule,
+    BrowserModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [PokemonService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
