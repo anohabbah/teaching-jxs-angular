@@ -1,0 +1,24 @@
+<h2>Pokemons</h2>
+
+<div>
+  <label for="query">Binding: </label>
+  <input type="text" [(ngModel)]="query" id="query">&nbsp;&nbsp;
+  <input type="text" readonly disabled [(ngModel)]="query"><br><br>
+</div>
+
+<div>
+  <label for="filter">Filter by name: </label>
+  <input type="text" [(ngModel)]="filter" id="filter">
+</div>
+<ul class="pokemons">
+  <li *ngFor="let pokemon of (pokemons | filterPokemon:'name':filter)">
+    <a [routerLink]="['/', (pokemon.url | extractId)]">
+      <span class="badge">{{ pokemon.url | extractId }}</span>
+      {{ pokemon.name }}
+    </a>
+  </li>
+</ul>
+
+<div>
+  <button (click)="performGO()">GO</button>
+</div>

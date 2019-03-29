@@ -4,10 +4,10 @@ import {PokemonService} from "../pokemon.service";
 
 @Component({
   selector: 'app-pokemon',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  templateUrl: './pokemon.component.html',
+  styleUrls: ['./pokemon.component.scss']
 })
-export class AppComponent implements OnInit {
+export class PokemonComponent implements OnInit {
 
   query: string = '';
 
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     this._pokeService.getPokemons()
       .subscribe((res: object) => {
         this.pokemons = res['results'];
+        console.log(this.pokemons)
       })
   }
 
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit {
     });
 
     pokemon.forEach((p: Pokemon) => {
-      console.log(`(${p.name})[${p.name}]`)
+      console.log(`(${p.url})[${p.name}]`)
     });
   }
 }

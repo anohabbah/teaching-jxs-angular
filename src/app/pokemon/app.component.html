@@ -1,9 +1,0 @@
-<input type="text" [(ngModel)]="query" id="query" placeholder="Search..."><br><br>
-<input type="text" readonly disabled [(ngModel)]="query"><br><br>
-
-<input type="text" [(ngModel)]="filter"><br><br>
-<select>
-  <option *ngFor="let pokemon of (pokemons | filterPokemon:'name':filter)" value="{{ pokemon.url }}">{{ pokemon.name }}</option>
-</select>
-<br><br>
-<button (click)="performGO()">GO</button>
