@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import _ from 'lodash';
 import {Pokemon} from "./pokemon";
 import {PokemonService} from "../pokemon.service";
-import {switchMap} from "rxjs/operators";
-import {ParamMap} from "@angular/router";
 import {Observable} from "rxjs";
 
 @Component({
@@ -18,7 +16,8 @@ export class PokemonComponent implements OnInit {
   pokemons: Pokemon[] = [];
   private pokemon$: Observable<Pokemon>;
 
-  constructor(private _pokeService: PokemonService) {}
+  constructor(private _pokeService: PokemonService) {
+  }
 
   ngOnInit() {
     this._pokeService.getPokemons()
