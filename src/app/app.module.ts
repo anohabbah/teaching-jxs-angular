@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { PokemonComponent as PokemonComponent } from './pokemon/pokemon.component';
-import { FilterPokemonPipe } from './filter-pokemon.pipe';
+import { FilterPokemonPipe } from './pipes/filter-pokemon.pipe';
 import {HttpClientModule} from "@angular/common/http";
 import {PokemonService} from "./pokemon.service";
 import { DetailComponent } from './pokemon/detail/detail.component';
 import {RouterModule, Routes} from "@angular/router";
-import { ExtractIdPipe } from './extract-id.pipe';
+import { ExtractIdPipe } from './pipes/extract-id.pipe';
 
 const routes: Routes = [
   { path: '', component: PokemonComponent },

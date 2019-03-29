@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Pokemon} from "../pokemon";
+import _ from 'lodash';
+import {Pokemon} from "./pokemon";
 import {PokemonService} from "../pokemon.service";
+import {switchMap} from "rxjs/operators";
+import {ParamMap} from "@angular/router";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-pokemon',
@@ -11,9 +15,8 @@ export class PokemonComponent implements OnInit {
 
   query: string = '';
 
-  filter: string = '';
-
   pokemons: Pokemon[] = [];
+  private pokemon$: Observable<Pokemon>;
 
   constructor(private _pokeService: PokemonService) {}
 
@@ -25,13 +28,15 @@ export class PokemonComponent implements OnInit {
       })
   }
 
-  performGO() {
-    const pokemon: Pokemon[] = this.pokemons.filter((e) => {
-      return e.name.toLowerCase().indexOf(this.filter.toLowerCase()) !== -1;
-    });
+  searchQuery(id?: string) {
+    this.pokemon$ = this._pokeService.getPokemon(id || this.query)
+  }
 
-    pokemon.forEach((p: Pokemon) => {
-      console.log(`(${p.url})[${p.name}]`)
-    });
+  findDetail(url: string) {
+    const arr: string[] = url.split('/');
+    arr.pop();
+    const pokeId = _.last(arr);
+
+    this.searchQuery(pokeId)
   }
 }

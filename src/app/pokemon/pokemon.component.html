@@ -1,22 +1,45 @@
-<div>
-  <label for="query">Binding: </label>
-  <input type="text" [(ngModel)]="query" id="query">&nbsp;&nbsp;
-  <input type="text" readonly disabled [(ngModel)]="query"><br><br>
-</div>
+<!--<div>-->
+  <!--<label for="query">Binding: </label>-->
+  <!--<input type="text" [(ngModel)]="query" id="query">&nbsp;&nbsp;-->
+  <!--<input type="text" readonly disabled [(ngModel)]="query"><br><br>-->
+<!--</div>-->
 
 <div>
-  <label for="filter">Filter by name: </label>
-  <input type="text" [(ngModel)]="filter" id="filter">
+  <label for="query">Search by name: </label>
+  <input type="text" [(ngModel)]="query" id="query"
+         (keydown.enter)="searchQuery()"
+         placeholder="Give me a pokemon name...">
+  <button (click)="searchQuery()">GO</button>
 </div>
-<ul class="pokemons">
-  <li *ngFor="let pokemon of (pokemons | filterPokemon:'name':filter)">
-    <a [routerLink]="['/', (pokemon.url | extractId)]">
-      <span class="badge">{{ pokemon.url | extractId }}</span>
-      {{ pokemon.name }}
-    </a>
-  </li>
-</ul>
 
-<div>
-  <button (click)="performGO()">GO</button>
+<div style="display: flex">
+  <ul class="pokemons" style="flex: 1">
+    <li *ngFor="let pokemon of (pokemons | filterPokemon:'name':query)">
+      <a (click)="findDetail(pokemon.url)">
+        <span class="badge">{{ pokemon.url | extractId }}</span>
+        {{ pokemon.name }}
+      </a>
+    </li>
+  </ul>
+  <div style="flex: 2; margin-left: 50px">
+    <div *ngIf="pokemon$ | async as pokemon">
+      <h3>{{ pokemon.name | titlecase }}</h3>
+      <div>
+        <label>Id: </label>{{ pokemon.id }}
+      </div>
+      <div>
+        <label>Base Experience: </label>{{ pokemon.base_experience }}
+      </div>
+      <div>
+        <label>Height: </label>{{ pokemon.height }}
+      </div>
+      <div>
+        <label>Order: </label>{{ pokemon.order }}
+      </div>
+      <div>
+        <label>Weight: </label>{{ pokemon.weight }}
+      </div>
+    </div>
+    <div *ngIf="!(pokemon$ | async)">Select a pokemon to see its detail, or use the search box to find another one</div>
+  </div>
 </div>

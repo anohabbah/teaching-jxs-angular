@@ -16,8 +16,8 @@ export class DetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pokemon$ = this.route.paramMap.pipe(switchMap(
-      (params: ParamMap) => this.pokeService.getPokemon(Number(params.get('id'))))
-    );
+    // this.pokemon$ = this.route.paramMap.pipe(switchMap(
+    //   (params: ParamMap) => this.pokeService.getPokemon(Number(params.get('id'))))
+    // );
   }
 }
