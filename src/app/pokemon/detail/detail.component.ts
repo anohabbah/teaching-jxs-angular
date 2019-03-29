@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import {PokemonService} from "../../pokemon.service";
-import {Pokemon} from "../../pokemon";
 import {switchMap} from "rxjs/operators";
 import {Observable} from "rxjs";
 
@@ -13,7 +12,8 @@ import {Observable} from "rxjs";
 export class DetailComponent implements OnInit {
   pokemon$: Observable<any>;
 
-  constructor(private route: ActivatedRoute, private router: Router, private pokeService: PokemonService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private pokeService: PokemonService) {
+  }
 
   ngOnInit() {
     this.pokemon$ = this.route.paramMap.pipe(switchMap(
